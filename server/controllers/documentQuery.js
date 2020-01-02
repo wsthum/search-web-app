@@ -1,11 +1,16 @@
 const fileReader = require("../services/jsonFileToObjectConverter")
+const dataQuery = require("../services/jsonDataQuery")
 
 module.exports.queryFile = async (req, res) => {
 	try {
-		const { type, data } = req.params
+		const { type } = req.params
+		const { field, value } = req.body
 		let jsonData = await fileReader.readStaticFileType(type)
-		console.log(jsonData.data[0])
-		res.status(200).json(jsonData)
+		if(!jsonData.success) {
+			res.status(200).json(jsonData)
+		}
+		let querySol = await dataQuery.query(jsonData.data, field, value)
+		res.status(200).json(querySol)
 	} catch(e) {
 		if(e.message){
 			e = e.message
