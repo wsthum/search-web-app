@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-// app.use(config.apiPath, require("./v1/routes/login"));
+app.use(config.apiPath, require(config.documentQueryApiPath));
 // app.use(express.static(__dirname + '/dist/dunst'));
 
 // app.get('/*', function(req,res) {
