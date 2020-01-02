@@ -4,9 +4,18 @@ module.exports.query = function(data, field, value) {
         field = String(field)
         value = String(value)
         for(var i = 0; i < data.length; i++) {
-            var rowValue = String(data[i][field])
-            if(rowValue === value) {
-                sol.push(data[i])
+            var fieldContent = data[i][field]
+            if(Array.isArray(fieldContent)) {
+                for(var j = 0; j < fieldContent.length; j++) {
+                    if(fieldContent[j] === value) {
+                        sol.push(data[i])
+                    }
+                }
+            } else {
+                var rowValue = String(fieldContent)
+                if(rowValue === value) {
+                    sol.push(data[i])
+                }
             }
         }
         res({ success: true, data: sol})
