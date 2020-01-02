@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/wsthum/search-web-app#readme",
   "dependencies": {
-    "core-js": "^3.6.1"
+    "body-parser": "^1.19.0",
+    "core-js": "^3.6.1",
+    "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7"
   }
 }
