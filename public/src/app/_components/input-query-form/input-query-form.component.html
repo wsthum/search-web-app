@@ -1,0 +1,35 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+	<div class="form-group" [ngClass]="{ 'has-error': invalidDataType() }"> <!-- Data Type -->
+		<label for="data_type" class="control-label">Data Type</label>
+		<input type="text" formControlName="data_type" class="form-control" id="data_type" name="data_type" placeholder="Users">
+        <p *ngIf="invalidDataType()" id="data_type_error" class="help-block">Invalid data type.</p>
+	</div>
+
+	<div class="form-group" [ngClass]="{ 'has-error': invalidInputField() }"> <!-- Input Field -->
+		<label for="input_field" class="control-label">Input Field</label>
+		<input type="text" formControlName="input_field" class="form-control" id="input_field" name="input_field" placeholder="_id">
+        <p *ngIf="invalidInputField()" id="input_field_error" class="help-block">Invalid input field.</p>
+	</div>
+
+	<div class="form-group"> <!-- Query Value -->
+		<label for="query_value" class="control-label">Query Value</label>
+        <input type="text" formControlName="query_value" class="form-control" id="query_value" name="query_value" placeholder="71">
+	</div>
+	
+	<div class="form-group has-error"> <!-- Register Button -->
+		<button type="submit" class="btn btn-primary">Register</button>
+	</div>
+</form>	
+
+<table class="table">
+	<thead>
+	  <tr>           
+		<th *ngFor="let head of items[0] | keys">{{head}}</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr *ngFor="let item of items">           
+		<td *ngFor="let list of item | keys">{{item[list]}}</td>
+	  </tr>
+	</tbody>
+</table>
