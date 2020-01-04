@@ -1,0 +1,26 @@
+.header {
+    font-weight: bold;    
+}
+
+#desc {
+    width: 1000px;
+    padding-bottom: 25px;
+}
+
+.userformFields {
+    display: inline-block;
+}
+
+#inputForm {
+    padding-bottom: 20px;
+}
+
+#secondDropDown {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#textInputField {
+    padding-left: 40px;
+    padding-right: 40px;    
+}

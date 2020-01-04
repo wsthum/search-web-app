@@ -1,25 +1,51 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-	<div class="form-group" [ngClass]="{ 'has-error': invalidDataType() }"> <!-- Data Type -->
-		<label for="data_type" class="control-label">Data Type</label>
-		<input type="text" formControlName="data_type" class="form-control" id="data_type" name="data_type" placeholder="Users">
-        <p *ngIf="invalidDataType()" id="data_type_error" class="help-block">Invalid data type.</p>
+<h2 class="header">Simple Search App</h2>
+<p align="justify" id="desc">Please select the data type you are interested in searching - (users, organizations or tickets)
+in the dropdown on the first column. Once done, the available query fields for the data type will 
+appear in the dropdown on the second column. Next, key in the keyword you are interested in 
+querying for, if left blank, it will default to an empty string. Finally, click on submit. The 
+corresponding records for the provided data type will show in the table below the button.
+Note that submission won't work if you leave the data type and query field empty.</p>
+
+<form id="inputForm" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+	<div class="userformFields">
+		<h4>Data File Selection</h4>
+		<mat-form-field>
+		<mat-label>Select a type</mat-label>
+		<mat-select (selectionChange)="typeDropdownChange($event.value)" formControlName="type">
+			<mat-option *ngFor="let typeName of typeNames" [value]="typeName">
+			{{typeName}}
+			</mat-option>
+		</mat-select>
+		</mat-form-field>
 	</div>
 
-	<div class="form-group" [ngClass]="{ 'has-error': invalidInputField() }"> <!-- Input Field -->
-		<label for="input_field" class="control-label">Input Field</label>
-		<input type="text" formControlName="input_field" class="form-control" id="input_field" name="input_field" placeholder="_id">
-        <p *ngIf="invalidInputField()" id="input_field_error" class="help-block">Invalid input field.</p>
+	<div class="userformFields" id="secondDropDown">
+		<h4>Available Query Fields</h4>
+		<mat-form-field>
+			<mat-label>Select a field</mat-label>
+			<mat-select [(value)]="selected" formControlName="field">
+			<mat-option *ngFor="let fieldName of dynamicFields" [value]="fieldName">
+				{{fieldName}}
+			</mat-option>
+			</mat-select>
+		</mat-form-field>
 	</div>
 
-	<div class="form-group"> <!-- Query Value -->
-		<label for="query_value" class="control-label">Query Value</label>
-        <input type="text" formControlName="query_value" class="form-control" id="query_value" name="query_value" placeholder="71">
+	<div class="userformFields" id="textInputField">
+		<h4>Query Keyword For Field</h4>
+		<mat-form-field>
+		<input matInput placeholder="Enter Keyword" formControlName="query">
+		</mat-form-field>
 	</div>
-	
-	<div class="form-group has-error"> <!-- Register Button -->
-		<button type="submit" class="btn btn-primary">Register</button>
+
+	<div class="button-wrapper">
+		<button mat-button-stroked>Submit</button>
 	</div>
+
 </form>	
+<p *ngIf="invalidType()" id="type_error" class="help-block">Please select a data file type.</p>
+<p *ngIf="invalidField()" id="field_error" class="help-block">Please select a query field.</p>
 
 <table class="table">
 	<thead>
