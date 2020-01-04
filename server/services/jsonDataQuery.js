@@ -18,6 +18,10 @@ module.exports.query = function(data, field, value) {
                 }
             }
         }
-        res({ success: true, data: sol})
+        if(sol.length == 0) {
+            res({ success: false, error: "No records matching query found!"})
+        } else {
+            res({ success: true, data: sol})
+        }
     })
 }

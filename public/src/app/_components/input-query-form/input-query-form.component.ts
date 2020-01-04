@@ -23,13 +23,14 @@ export class InputQueryFormComponent implements OnInit {
   submitted = false;
   userForm: FormGroup;
   items = [];
+  runQuery = false;
 
   constructor(private formBuilder: FormBuilder,
               private queryService: QueryService) { 
     this.userForm = this.formBuilder.group({
       type: ['', Validators.required],
       field: ['', Validators.required],
-      query: ['']
+      value: ['']
     });
   }
 
@@ -41,13 +42,23 @@ export class InputQueryFormComponent implements OnInit {
   	return (this.submitted && this.userForm.controls.field.errors != null);
   }
 
+  noResultsFound() {
+    return (this.runQuery && this.items.length == 0);
+  }
+
+  resultsFound() {
+    return (this.runQuery && this.items.length != 0);
+  }
+
   ngOnInit() {
 
   }
 
   typeDropdownChange(val: string) {
+    this.runQuery = false;
+    this.submitted = false;
+    this.userForm.get('field').setValue("");
     this.userForm.controls['field'].setErrors({'incorrect': true});
-    this.userForm.value.field = "";
     if(val === 'organizations') {
       this.dynamicFields = this.orgFields;
     } else if(val === 'users') {
@@ -57,6 +68,11 @@ export class InputQueryFormComponent implements OnInit {
     }
   }
 
+  fieldDropdownChange(val: string) {
+    this.submitted = false;
+    this.runQuery = false;
+  }
+
   onSubmit() {
     this.submitted = true;
     console.log(this.userForm.value);
@@ -64,13 +80,19 @@ export class InputQueryFormComponent implements OnInit {
   		return;
   	}
   	else {
+      this.runQuery = true;
       let data: any = Object.assign(this.userForm.value);
-      console.log(data)
       this.queryService.queryData(data)
         .subscribe((queryResult) => {
-          this.items = <any[]>queryResult;
+          if(queryResult['success']) {
+            this.items = queryResult['data'];
+          } else {
+            this.items = []
+          }
         })
-  	}
+
+    }
+    
   }
 
 }

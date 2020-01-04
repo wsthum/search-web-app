@@ -8,7 +8,7 @@ Note that submission won't work if you leave the data type and query field empty
 
 <form id="inputForm" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
-	<div class="userformFields">
+	<div class="userformFields" id="firstDropDown">
 		<h4>Data File Selection</h4>
 		<mat-form-field>
 		<mat-label>Select a type</mat-label>
@@ -24,7 +24,7 @@ Note that submission won't work if you leave the data type and query field empty
 		<h4>Available Query Fields</h4>
 		<mat-form-field>
 			<mat-label>Select a field</mat-label>
-			<mat-select [(value)]="selected" formControlName="field">
+			<mat-select (selectionChange)="fieldDropdownChange($event.value)" formControlName="field">
 			<mat-option *ngFor="let fieldName of dynamicFields" [value]="fieldName">
 				{{fieldName}}
 			</mat-option>
@@ -35,7 +35,7 @@ Note that submission won't work if you leave the data type and query field empty
 	<div class="userformFields" id="textInputField">
 		<h4>Query Keyword For Field</h4>
 		<mat-form-field>
-		<input matInput placeholder="Enter Keyword" formControlName="query">
+		<input matInput placeholder="Enter Keyword" formControlName="value">
 		</mat-form-field>
 	</div>
 
@@ -46,6 +46,8 @@ Note that submission won't work if you leave the data type and query field empty
 </form>	
 <p *ngIf="invalidType()" id="type_error" class="help-block">Please select a data file type.</p>
 <p *ngIf="invalidField()" id="field_error" class="help-block">Please select a query field.</p>
+
+<div *ngIf="resultsFound()"> There were {{ items.length }} record(s) found.</div>
 
 <table class="table">
 	<thead>
@@ -59,3 +61,5 @@ Note that submission won't work if you leave the data type and query field empty
 	  </tr>
 	</tbody>
 </table>
+
+<p *ngIf="noResultsFound()" id="no_results_error" class="help-block">No data was found for this query!</p>

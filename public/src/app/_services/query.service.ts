@@ -14,9 +14,9 @@ export class QueryService {
 
   queryData(data: query) {
     console.log('inside queryData');
-    return this.http.post(`${environment.apiUrl}/query/type/${data.type}`, data)
-       .pipe(map(location => {
-           return location;
+    return this.http.post(`${environment.apiUrl}query/type/${data.type}`, data)
+       .pipe(map(queryData => {
+           return queryData;
         }), catchError(this.handleError)
        );
    }
