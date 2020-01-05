@@ -72,5 +72,30 @@ describe('Json Data Query Service', function() {
         assert.equal(jsonObj.data.length, 1, "Query should return row with query boolean value");
     });
 
+    it('should return row if search value is empty for field and field does not exist in row', async function() {
+        var data = [
+            {_id: 71},
+            {_id: 80, value: false},
+            {_id: 100, value: true}
+        ];
+        var field = "value";
+        var value = "";
+        var jsonObj = await jsonQuery.query(data, field, value);
+        assert.equal(jsonObj.data.length, 1, "Query should return row with query boolean value");
+    });
+
+    it('should return rows if search value is empty and field does not exist or empty in row', async function() {
+        var data = [
+            {value: true},
+            {_id: "", value: true},
+            {_id: 80, value: false},
+            {_id: 100, value: true}
+        ];
+        var field = "_id";
+        var value = "";
+        var jsonObj = await jsonQuery.query(data, field, value);
+        assert.equal(jsonObj.data.length, 2, "Query should return row with query boolean value");
+    });
+
 
 })

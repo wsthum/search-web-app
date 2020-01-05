@@ -14,15 +14,16 @@ export class InputQueryFormComponent implements OnInit {
                           'verified', 'shared', 'locale', 'timezone', 'last_login_at', 'email', 
                           'phone', 'signature', 'organization_id', 'tags', 'suspended', 'role'];
   ticketFields: string[] = ['_id', 'url', 'external_id', 'created_at', 'type', 'subject', 
-                            'description', 'priority', 'status', 'recipient', 'submitted_id', 
+                            'description', 'priority', 'status', 'submitter_id', 
                             'assignee_id', 'organization_id', 'tags', 'has_incidents', 'due_at', 
-                            'via', 'requester_id'];
+                            'via'];
   orgFields: string[] = ['_id', 'url', 'external_id', 'name', 'domain_names', 'created_at', 
                           'details', 'shared_tickets', 'tags'];
   dynamicFields: string[];
   submitted = false;
   userForm: FormGroup;
   items = [];
+  displayedColumns = [];
   runQuery = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -86,6 +87,9 @@ export class InputQueryFormComponent implements OnInit {
         .subscribe((queryResult) => {
           if(queryResult['success']) {
             this.items = queryResult['data'];
+            for(var colName in this.items) {
+              this.displayedColumns.push(colName);
+            }
           } else {
             this.items = [];
           }

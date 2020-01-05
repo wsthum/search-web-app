@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatTableModule } from "@angular/material";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +28,11 @@ import { KeysPipe } from './_helpers/keys.pipe';
     MatFormFieldModule, 
     MatInputModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatPaginatorModule, 
+    MatProgressSpinnerModule,
+    MatSortModule, 
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
