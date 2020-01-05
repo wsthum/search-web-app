@@ -29,19 +29,11 @@ export class QueryService {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       /* if token expired*/
-      if ( error.status === 401 ) {
-          return throwError('401');
-
+      if ( error.status === 500 ) {
+          return throwError('500');
       }
-      if ( error.status === 404 ) {
-        return throwError('404');
-
-      }
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
-    return throwError('E100');
+    return throwError('An issue occurred while calling query API!');
   }
 }

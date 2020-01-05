@@ -4,7 +4,7 @@
   "description": "A simple search full stack web app built in Angular and NodeJS",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,14 @@
   "homepage": "https://github.com/wsthum/search-web-app#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "core-js": "^3.6.1",
     "express": "^4.17.1",
-    "gulp": "^4.0.2",
+    "mocha": "^7.0.0",
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
+    "sinon": "^8.0.2",
     "util": "^0.12.1"
   }
 }

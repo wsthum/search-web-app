@@ -87,9 +87,11 @@ export class InputQueryFormComponent implements OnInit {
           if(queryResult['success']) {
             this.items = queryResult['data'];
           } else {
-            this.items = []
+            this.items = [];
           }
-        })
+        }, error => {
+          console.log(error);
+        });
 
     }
     
