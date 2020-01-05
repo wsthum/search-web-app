@@ -1,8 +1,8 @@
-const chai = require('chai')
+const chai = require("chai")
 var assert = chai.assert;
 const expect = chai.expect
 var jsonFileReader = require("../server/services/jsonFileToObjectConverter")
-const chaiAsPromised = require('chai-as-promised');
+const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised)
 
 describe('Json File Converter Service', function() {

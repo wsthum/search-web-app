@@ -1,4 +1,4 @@
-var chai = require('chai');
+var chai = require("chai");
 var assert = chai.assert;
 var jsonQuery = require("../server/services/jsonDataQuery")
 

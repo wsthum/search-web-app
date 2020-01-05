@@ -4,7 +4,7 @@
   "description": "A simple search full stack web app built in Angular and NodeJS",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --exit"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
     "core-js": "^3.6.1",
     "express": "^4.17.1",
     "mocha": "^7.0.0",

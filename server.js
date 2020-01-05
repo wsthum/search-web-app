@@ -21,6 +21,8 @@ app.use(function(err, req, res, next) {
     return res.status(500).json({ success: false, error: err.message });
 });
 
-app.listen(3002, function(){
+app.listen(config.serverPort, function(){
     console.log("Backend server running on localhost:3002");
 })
+
+module.exports = app;
