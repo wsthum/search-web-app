@@ -81,7 +81,7 @@ describe('Json Data Query Service', function() {
         var field = "value";
         var value = "";
         var jsonObj = await jsonQuery.query(data, field, value);
-        assert.equal(jsonObj.data.length, 1, "Query should return row with query boolean value");
+        assert.equal(jsonObj.data.length, 1, "Query should return row with missing value field");
     });
 
     it('should return rows if search value is empty and field does not exist or empty in row', async function() {
@@ -94,7 +94,7 @@ describe('Json Data Query Service', function() {
         var field = "_id";
         var value = "";
         var jsonObj = await jsonQuery.query(data, field, value);
-        assert.equal(jsonObj.data.length, 2, "Query should return row with query boolean value");
+        assert.equal(jsonObj.data.length, 2, "Query should return row with missing/empty value field");
     });
 
 
