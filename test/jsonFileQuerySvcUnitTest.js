@@ -13,6 +13,7 @@ describe('Json Data Query Service', function() {
         var jsonObj = await jsonQuery.query(data, field, value);
         assert.equal(jsonObj.data.length, 1, "Query should return the row which contains the value for the field");
     });
+    
 
     it('should return success field as false if no rows matches query field and value', async function() {
         var data = [
