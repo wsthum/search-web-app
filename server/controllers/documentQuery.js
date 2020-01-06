@@ -10,19 +10,19 @@ const dataQuery = require("../services/jsonDataQuery");
  *          status 400 if errors and found if some service fails or unexpected failures happens
  */
 module.exports.queryFile = async (req, res) => {
-	try {
-		const { type } = req.params;
-		const { field, value } = req.body;
-		let jsonData = await fileReader.readStaticFileType(type);
-		if (!jsonData.success) {
-			res.status(200).json(jsonData);
-		}
-		let querySol = await dataQuery.query(jsonData.data, field, value);
-		res.status(200).json(querySol)
-	} catch (e) {
-		if (e.message) {
-			e = e.message;
-		}
-		res.status(400).json({ success: false, err: e });
-	}
+  try {
+    const { type } = req.params;
+    const { field, value } = req.body;
+    let jsonData = await fileReader.readStaticFileType(type);
+    if (!jsonData.success) {
+      res.status(200).json(jsonData);
+    }
+    let querySol = await dataQuery.query(jsonData.data, field, value);
+    res.status(200).json(querySol)
+  } catch (e) {
+    if (e.message) {
+      e = e.message;
+    }
+    res.status(400).json({ success: false, err: e });
+  }
 }

@@ -12,19 +12,19 @@ const readFile = util.promisify(fs.readFile);
  *           containing json object that is read from file
  */
 module.exports.readStaticFileType = function (fileType) {
-	return new Promise(function (res, rej) {
-		var fileString = filePath + fileType + ".json";
-		readFile(fileString, { encoding: 'utf8' })
-			.then(function (content) {
-				content = JSON.parse(content);
-				if (!content) {
-					res({ success: false, err: "File read failed" });
-				} else {
-					res({ success: true, data: content });
-				}
-			})
-			.catch(function (err) {
-				rej(err);
-			})
-	})
+  return new Promise(function (res, rej) {
+    var fileString = filePath + fileType + ".json";
+    readFile(fileString, { encoding: 'utf8' })
+      .then(function (content) {
+        content = JSON.parse(content);
+        if (!content) {
+          res({ success: false, err: "File read failed" });
+        } else {
+          res({ success: true, data: content });
+        }
+      })
+      .catch(function (err) {
+        rej(err);
+      })
+  })
 }
