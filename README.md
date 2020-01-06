@@ -47,10 +47,41 @@ npm test
 ```
 This will run the Mocha tests automatically and the passed and failed test cases should show on the command line. If all the steps are completed and the libraries are installed, the tests should all pass.
 
-### Starting the frontend and backend of the web application
+### Starting the backend of the web application
 In the root folder containing the server.js file, run:
 ```
 npm start
 ```
-This kickstarts the backend server and you should see 
+This starts the backend server and you should see the output on the command line below:
+
 ![](https://github.com/wsthum/search-web-app/blob/master/screenshots/backendnpmStart.jpg)
+
+### Starting the frontend of the web application
+After starting the backend server, cd into the public folder. Once you make sure that you are in the public folder.
+Run the same command below again:
+```
+npm start
+```
+This will start the angular cli to serve the frontend files. It takes a while to render the files so please wait for a while. The output on the command line will look like this when that's done:
+
+![](https://github.com/wsthum/search-web-app/blob/master/screenshots/frontendnpmStart.jpg)
+
+## Using the application
+With the test completed and the frontend and backend server, we can now start using the application! 
+If you go to http://localhost:4200, you will see the single page web application below.
+
+![](https://github.com/wsthum/search-web-app/blob/master/screenshots/mainAppUI.jpg)
+
+You can now select the data type (organizations, users or tickets), the key and value you want to query for and submit, then the results will appear below the submit button, more details about this can be found on the page.
+
+![](https://github.com/wsthum/search-web-app/blob/master/screenshots/mainAppQuery.jpg)
+
+The mandatory fields are data type and key field, if those are not selected, error messages will show.
+
+![](https://github.com/wsthum/search-web-app/blob/master/screenshots/mainAppError.jpg)
+
+
+
+
+
+
