@@ -52,4 +52,5 @@ In the root folder containing the server.js file, run:
 ```
 npm start
 ```
-This kickstarts the backend server and you should see "Backend"
+This kickstarts the backend server and you should see 
+![](https://github.com/wsthum/search-web-app/blob/master/screenshots/backendnpmStart.jpg)
