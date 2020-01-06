@@ -36,7 +36,7 @@ module.exports.query = function (data, field, value) {
         }
       }
     }
-		//Might have keys that don't exist, need to fix insert order and values that don't exist for keys
+    // Might have keys that don't exist, need to fix insert order and values that don't exist for keys
     // Stores keys of the longest json entry in sol
     let mapFields = [];
     if (sol.length != 0) {
