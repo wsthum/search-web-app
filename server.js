@@ -22,7 +22,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(config.serverPort, function(){
-    console.log("Backend server running on localhost:3002");
+    console.log("Backend server running on port", config.serverPort);
 })
 
 module.exports = app;
