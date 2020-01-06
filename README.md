@@ -1,4 +1,4 @@
-# Simple search web app using Express, Angular 8 and NodeJS
+# Search web app using Express, Angular 8 and NodeJS
 This repository contains three main sections - testing, frontend and backend. Since the three .json files have been provided, the typical NoSQL database MongoDB component is skipped since queries can be made directly using the files so that data can be retrieved by the means of simple file reads. By going through this guide, you'll understand how to:
 * Run unit tests and integration tests for backend using Mocha and Chai library before starting individual components using Mocha via npm
 * Start the backend NodeJS/Express server using node via npm
