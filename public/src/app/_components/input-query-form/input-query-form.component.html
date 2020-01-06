@@ -1,23 +1,24 @@
 <h2 class="header">Simple Search App</h2>
-<p align="justify" id="desc">Please select the data type you are interested in searching - (users, organizations or tickets)
-in the dropdown on the first column. Once done, the available query fields for the data type will 
-appear in the dropdown on the second column. Next, key in the keyword you are interested in 
-querying for, if left blank, it will default to an empty string and will match to records 
-where the query field is empty or does not exist. Finally, click on submit. The 
-corresponding records for the provided data type will show in the table below the button.
-Note that submission won't work if you leave the data type and query field empty.</p>
+<p align="justify" id="desc">Please select the data type you are interested in searching - (users, organizations or
+	tickets)
+	in the dropdown on the first column. Once done, the available query fields for the data type will
+	appear in the dropdown on the second column. Next, key in the keyword you are interested in
+	querying for, if left blank, it will default to an empty string and will match to records
+	where the query field is empty or does not exist. Finally, click on submit. The
+	corresponding records for the provided data type will show in the table below the button.
+	Note that submission won't work if you leave the data type and query field empty.</p>
 
 <form id="inputForm" [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
 	<div class="userformFields" id="firstDropDown">
 		<h4>Data File Selection</h4>
 		<mat-form-field>
-		<mat-label>Select a type</mat-label>
-		<mat-select (selectionChange)="typeDropdownChange($event.value)" formControlName="type">
-			<mat-option *ngFor="let typeName of typeNames" [value]="typeName">
-			{{typeName}}
-			</mat-option>
-		</mat-select>
+			<mat-label>Select a type</mat-label>
+			<mat-select (selectionChange)="typeDropdownChange($event.value)" formControlName="type">
+				<mat-option *ngFor="let typeName of typeNames" [value]="typeName">
+					{{typeName}}
+				</mat-option>
+			</mat-select>
 		</mat-form-field>
 	</div>
 
@@ -26,9 +27,9 @@ Note that submission won't work if you leave the data type and query field empty
 		<mat-form-field>
 			<mat-label>Select a field</mat-label>
 			<mat-select (selectionChange)="fieldDropdownChange($event.value)" formControlName="field">
-			<mat-option *ngFor="let fieldName of dynamicFields" [value]="fieldName">
-				{{fieldName}}
-			</mat-option>
+				<mat-option *ngFor="let fieldName of dynamicFields" [value]="fieldName">
+					{{fieldName}}
+				</mat-option>
 			</mat-select>
 		</mat-form-field>
 	</div>
@@ -36,7 +37,7 @@ Note that submission won't work if you leave the data type and query field empty
 	<div class="userformFields" id="textInputField">
 		<h4>Query Keyword For Field</h4>
 		<mat-form-field>
-		<input matInput placeholder="Enter Keyword" formControlName="value">
+			<input matInput placeholder="Enter Keyword" formControlName="value">
 		</mat-form-field>
 	</div>
 
@@ -44,7 +45,7 @@ Note that submission won't work if you leave the data type and query field empty
 		<button mat-button-stroked>Submit</button>
 	</div>
 
-</form>	
+</form>
 <p *ngIf="invalidType()" id="type_error" class="help-block">Please select a data file type.</p>
 <p *ngIf="invalidField()" id="field_error" class="help-block">Please select a query field.</p>
 
@@ -52,14 +53,14 @@ Note that submission won't work if you leave the data type and query field empty
 
 <table class="table">
 	<thead>
-	  <tr>           
-		<th *ngFor="let head of items[0] | keys">{{head}}</th>
-	  </tr>
+		<tr>
+			<th *ngFor="let head of items[0] | keys">{{head}}</th>
+		</tr>
 	</thead>
 	<tbody>
-	  <tr *ngFor="let item of items">           
-		<td *ngFor="let list of item | keys">{{item[list]}}</td>
-	  </tr>
+		<tr *ngFor="let item of items">
+			<td *ngFor="let list of item | keys">{{item[list]}}</td>
+		</tr>
 	</tbody>
 </table>
 

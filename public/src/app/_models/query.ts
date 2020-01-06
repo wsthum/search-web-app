@@ -1,5 +1,5 @@
 export class query {
-    type: string;
-    field: string;
-    value: string;
+	type: string;
+	field: string;
+	value: string;
 }
