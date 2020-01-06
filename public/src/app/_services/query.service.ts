@@ -13,7 +13,6 @@ export class QueryService {
   }
 
   queryData(data: query) {
-    console.log('inside queryData');
     return this.http.post(`${environment.apiUrl}query/type/${data.type}`, data)
        .pipe(map(queryData => {
            return queryData;
@@ -28,7 +27,6 @@ export class QueryService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      /* if token expired*/
       if ( error.status === 500 ) {
           return throwError('500');
       }

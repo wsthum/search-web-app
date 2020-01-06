@@ -1,9 +1,9 @@
-const chai = require("chai")
+const chai = require("chai");
 var assert = chai.assert;
-const expect = chai.expect
-var jsonFileReader = require("../server/services/jsonFileToObjectConverter")
+const expect = chai.expect;
+var jsonFileReader = require("../server/services/jsonFileToObjectConverter");
 const chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised)
+chai.use(chaiAsPromised);
 
 describe('Json File Converter Service', function() {
     it('should return exact number of rows for organizations.json file', async function() {
@@ -22,6 +22,6 @@ describe('Json File Converter Service', function() {
     });
 
     it('should return failure for json file name not in data folder', async function() {
-        await expect(jsonFileReader.readStaticFileType('tests')).to.be.rejected
+        await expect(jsonFileReader.readStaticFileType('tests')).to.be.rejected;
     });
 })

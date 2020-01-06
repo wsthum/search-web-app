@@ -1,8 +1,9 @@
 var chai = require("chai");
 var assert = chai.assert;
-var jsonQuery = require("../server/services/jsonDataQuery")
+var jsonQuery = require("../server/services/jsonDataQuery");
 
 describe('Json Data Query Service', function() {
+
     it('should return row which has a field that matches query field and value in array', async function() {
         var data = [
             {_id: 71, value: "text"},
