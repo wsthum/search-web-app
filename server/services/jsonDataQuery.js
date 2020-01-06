@@ -36,11 +36,11 @@ module.exports.query = function (data, field, value) {
         }
       }
     }
-		/**
+		/*
 		 *  Might have keys that don't exist for some row, fixing this by finding the first longest json row
 		 *  in the matched rows and formatting each json row to follow the same convention and order, order
 		 *  matters when front end displays data
-		 **/
+     */
     // Stores keys of the longest json entry in sol
     let mapFields = [];
     if (sol.length != 0) {
