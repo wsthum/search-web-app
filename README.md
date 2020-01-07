@@ -16,7 +16,7 @@ npm -v
 ```
 
 ### Installing the Angular Command Line Interface
-With the npm package manager installed, type the below command on the command line to install the Angular command line interface globally on your machine using npm, for more information you can visit https://cli.angular.io/:
+With the npm package manager installed, type the below command on the command line to install the latest Angular command line interface globally on your machine using npm, for more information you can visit https://cli.angular.io/:
 ```
 npm install -g @angular/cli
 ```
