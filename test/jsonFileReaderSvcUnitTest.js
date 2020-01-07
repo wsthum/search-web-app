@@ -7,7 +7,7 @@ const config = require("../config/config")
 chai.use(chaiAsPromised);
 
 describe('Json File Converter Service', function () {
-  
+
   it('should return exact number of rows for organizations.json file', async function () {
     var jsonObj = await jsonFileReader.readStaticFileType(config.mockDataFolderPath, 'organizations');
     assert.lengthOf(jsonObj.data, 26, "organizations.json should have 26 rows");

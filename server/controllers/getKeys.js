@@ -16,25 +16,25 @@ module.exports.getKeys = async (req, res) => {
   try {
     // Find .json filenames in data folder
     let fileNames = await findFolderFileNames.findNames(config.dataFolderPath);
-    if(!fileNames.success) {
+    if (!fileNames.success) {
       res.status(200).json(fileNames);
       return;
     }
     // Populating the filename: array of field names json map
     let fileKeyMap = {};
-    for(var i = 0; i < fileNames.data.length; i++) {
+    for (var i = 0; i < fileNames.data.length; i++) {
       let fileName = fileNames.data[i];
       // Converting .json file to json object
       let jsonData = await fileReader.readStaticFileType(config.dataFolderPath, fileName);
-      if(!jsonData.success) {
-        res.status(200).json(jsonData)
+      if (!jsonData.success) {
+        res.status(200).json(jsonData);
         return;
       }
       // Find all possible keys in json object
       let keys = await getKeys.findKeys(jsonData.data);
       fileKeyMap[fileName] = keys.data;
     }
-    res.status(200).json({ success: true, data: fileKeyMap }); 
+    res.status(200).json({ success: true, data: fileKeyMap });
   } catch (e) {
     if (e.message) {
       e = e.message;

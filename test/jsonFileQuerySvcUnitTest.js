@@ -14,7 +14,7 @@ describe('Json Data Query Service', function () {
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return the row which contains the value for the field");
-    assert.deepInclude(jsonObj.data, {"_id": 71, "value": "text"}, "Should contain matching row json value");
+    assert.deepInclude(jsonObj.data, { "_id": 71, "value": "text" }, "Should contain matching row json value");
   });
 
   it('should return success field as false if no rows matches query field and value', async function () {
@@ -39,7 +39,7 @@ describe('Json Data Query Service', function () {
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return row with empty value field");
-    assert.deepInclude(jsonObj.data, {"_id": 71, "value": "N/A"}, "Should contain matching row but empty strings are subbed with N/A");
+    assert.deepInclude(jsonObj.data, { "_id": 71, "value": "N/A" }, "Should contain matching row but empty strings are subbed with N/A");
   });
 
   it('should return row even if value field is an array that contains the query value', async function () {

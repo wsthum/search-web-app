@@ -12,14 +12,14 @@ module.exports.findNames = function (fileFolder) {
       var fileNames = [];
       files.forEach(file => {
         file = file.split(".json");
-        if(file.length > 1) {
+        if (file.length > 1) {
           fileNames.push(file[0]);
         }
       });
       if (fileNames.length == 0) {
         res({ success: false, err: "No data files in data folder!" });
       } else {
-        res({ success: true, data: fileNames })
+        res({ success: true, data: fileNames });
       }
     })
   })

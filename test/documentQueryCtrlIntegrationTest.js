@@ -21,8 +21,9 @@ describe('Static Document Query Controller Endpoint /POST ', function () {
       .end(function (error, response, body) {
         assert.equal(response.status, 200, "API req should return status code 200");
         assert.isArray(response.body.data, "Should contain an array containing query json matches");
-        assert.deepInclude(response.body.data, {"_id": 71}, "Should contain the row with only one key");
+        assert.deepInclude(response.body.data, { "_id": 71 }, "Should contain the row with only one key");
         done();
       });
   });
+
 })

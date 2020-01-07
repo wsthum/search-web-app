@@ -24,8 +24,8 @@ export class InputQueryFormComponent implements OnInit {
   runQuery = false;
 
   constructor(private formBuilder: FormBuilder,
-              private queryService: QueryService,
-              private fileKeyService: FileKeyService) {
+    private queryService: QueryService,
+    private fileKeyService: FileKeyService) {
     this.userForm = this.formBuilder.group({
       type: ['', Validators.required],
       field: ['', Validators.required],
@@ -58,18 +58,18 @@ export class InputQueryFormComponent implements OnInit {
     this.typeNames = [];
     this.fileFieldMap = new Map();
     this.fileKeyService.getFileKeys()
-    .subscribe((fileKeys) => {
-      if (fileKeys['success']) {
-        for(var fileName in fileKeys['data']) {
-          this.typeNames.push(fileName);
-          this.fileFieldMap[fileName] = fileKeys['data'][fileName];
+      .subscribe((fileKeys) => {
+        if (fileKeys['success']) {
+          for (var fileName in fileKeys['data']) {
+            this.typeNames.push(fileName);
+            this.fileFieldMap[fileName] = fileKeys['data'][fileName];
+          }
+        } else {
+          this.items = [];
         }
-      } else {
-        this.items = [];
-      }
-    }, error => {
-      console.log(error);
-    });
+      }, error => {
+        console.log(error);
+      });
   }
 
   // Event triggered when file type dropdown value changes
