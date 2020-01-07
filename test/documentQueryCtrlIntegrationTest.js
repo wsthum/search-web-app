@@ -1,7 +1,6 @@
 var chai = require("chai");
 var assert = chai.assert;
 let chaiHttp = require("chai-http");
-let config = require("../config/config")
 
 chai.use(chaiHttp);
 let app = require('../server')
@@ -16,11 +15,12 @@ describe('Static Document Query Controller Endpoint /POST ', function () {
       .set('content-type', 'application/x-www-form-urlencoded')
       .send({
         field: "_id",
-        value: 71
+        value: 71,
+        keys: "_id"
       })
       .end(function (error, response, body) {
         assert.equal(response.status, 200, "API req should return status code 200");
-        assert.equal(response.body.data.length, 1, "Should return one row that matches query")
+        assert.isArray(response.body.data, "Should contain an array containing query json matches")
         done();
       });
   });

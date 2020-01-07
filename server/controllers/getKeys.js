@@ -1,32 +1,36 @@
 const fileReader = require("../services/jsonFileToObjectConverter");
 const getKeys = require("../services/jsonDataGetKeys");
-const findDataFileNames = require("../services/findDataFileNames")
+const findFolderFileNames = require("../services/findFolderFileNames")
+const config = require("../../config/config")
 
 /**
- * @desc Controller containing services - queries json file with field and value to find 
- *       matching rows
- * @params req - API request with params containing filetype and body containing field and
- *         value to be queried from json file 
- * @returns status 200 if services are successfully called with success and err/data value
- *          status 400 if errors and found if some service fails or unexpected failures happens
+ * @desc Controller containing services - queries server/data folder path to find all possible keys for 
+ *       each .json file in the directory and output
+ * @params req - empty API request 
+ * @returns status 200 if services are successfully called with success and err/data value which
+ *                     contains a json with each key:value containing the json filename and the array
+ *                     of possible keys in the file
+ *          status 400 if errors are found, some service fails with hard err or unexpected failures happen
  */
 module.exports.getKeys = async (req, res) => {
   try {
-    let fileNames = await findDataFileNames.findNames();
+    // Find .json filenames in data folder
+    let fileNames = await findFolderFileNames.findNames(config.dataFolderPath);
     if(!fileNames.success) {
       res.status(200).json(fileNames);
       return;
     }
-    let fileKeyMap = {
-      
-    }
+    // Populating the filename: array of field names json map
+    let fileKeyMap = {};
     for(var i = 0; i < fileNames.data.length; i++) {
       let fileName = fileNames.data[i];
-      let jsonData = await fileReader.readStaticFileType(fileName);
+      // Converting .json file to json object
+      let jsonData = await fileReader.readStaticFileType(config.dataFolderPath, fileName);
       if(!jsonData.success) {
         res.status(200).json(jsonData)
         return;
       }
+      // Find all possible keys in json object
       let keys = await getKeys.findKeys(jsonData.data);
       fileKeyMap[fileName] = keys.data;
     }

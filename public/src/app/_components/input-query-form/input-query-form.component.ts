@@ -11,11 +11,11 @@ import { map } from 'rxjs/operators';
 })
 
 export class InputQueryFormComponent implements OnInit {
-  // Types of file types that are valid
+  // Types of static .json files
   typeNames: string[];
-  // Field value to file type name map
+  // File type name to field value array map
   fileFieldMap: Map<string, string[]>;
-  // Fields that should be displayed when file type is chosen
+  // Fields that should be displayed when file is chosen
   dynamicFields: string[];
   submitted = false;
   userForm: FormGroup;
@@ -54,22 +54,22 @@ export class InputQueryFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Storing the filename to array of field names map on page rendering
     this.typeNames = [];
     this.fileFieldMap = new Map();
     this.fileKeyService.getFileKeys()
-      .subscribe((fileKeys) => {
-        if (fileKeys['success']) {
-          for(var fileName in fileKeys['data']) {
-            this.typeNames.push(fileName);
-            this.fileFieldMap[fileName] = fileKeys['data'][fileName];
-          }
-          console.log(this.fileFieldMap)
-        } else {
-          this.items = [];
+    .subscribe((fileKeys) => {
+      if (fileKeys['success']) {
+        for(var fileName in fileKeys['data']) {
+          this.typeNames.push(fileName);
+          this.fileFieldMap[fileName] = fileKeys['data'][fileName];
         }
-      }, error => {
-        console.log(error);
-      });
+      } else {
+        this.items = [];
+      }
+    }, error => {
+      console.log(error);
+    });
   }
 
   // Event triggered when file type dropdown value changes
@@ -82,7 +82,6 @@ export class InputQueryFormComponent implements OnInit {
     this.userForm.controls['field'].setErrors({ 'incorrect': true });
     // Changes fields to be displayed based on filetype
     this.dynamicFields = this.fileFieldMap[fileType];
-    console.log(this.dynamicFields)
   }
 
   // Event triggered when field name dropdown value changes

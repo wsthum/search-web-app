@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GetDataKeysService } from './get-data-keys.service';
+import { FileKeyService } from './get-data-keys.service';
 
-describe('GetDataKeysService', () => {
+describe('FileKeyService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: GetDataKeysService = TestBed.get(GetDataKeysService);
+    const service: FileKeyService = TestBed.get(FileKeyService);
     expect(service).toBeTruthy();
   });
 });

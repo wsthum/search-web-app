@@ -10,11 +10,11 @@ describe('Json Data Query Service', function () {
       { _id: 80, value: "test" }
     ];
     var field = "_id";
-    var value = 71;
-    var jsonObj = await jsonQuery.query(data, field, value);
+    var value = 71
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return the row which contains the value for the field");
   });
-
 
   it('should return success field as false if no rows matches query field and value', async function () {
     var data = [
@@ -23,7 +23,8 @@ describe('Json Data Query Service', function () {
     ];
     var field = "_id";
     var value = 100;
-    var jsonObj = await jsonQuery.query(data, field, value);
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.success, false, "Query should return json with false success field");
   });
 
@@ -34,7 +35,8 @@ describe('Json Data Query Service', function () {
     ];
     var field = "value";
     var value = "";
-    var jsonObj = await jsonQuery.query(data, field, value);
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return row with empty value field");
   });
 
@@ -45,7 +47,8 @@ describe('Json Data Query Service', function () {
     ];
     var field = "value";
     var value = "test";
-    var jsonObj = await jsonQuery.query(data, field, value);
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return rows with array field containing value");
   });
 
@@ -57,7 +60,8 @@ describe('Json Data Query Service', function () {
     ];
     var field = "value";
     var value = "test";
-    var jsonObj = await jsonQuery.query(data, field, value);
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 2, "Query should return rows which contain value");
   });
 
@@ -69,7 +73,8 @@ describe('Json Data Query Service', function () {
     ];
     var field = "value";
     var value = false;
-    var jsonObj = await jsonQuery.query(data, field, value);
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return row with query boolean value");
   });
 
@@ -81,7 +86,8 @@ describe('Json Data Query Service', function () {
     ];
     var field = "value";
     var value = "";
-    var jsonObj = await jsonQuery.query(data, field, value);
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return row with missing value field");
   });
 
@@ -94,8 +100,35 @@ describe('Json Data Query Service', function () {
     ];
     var field = "_id";
     var value = "";
-    var jsonObj = await jsonQuery.query(data, field, value);
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 2, "Query should return row with missing/empty value field");
+  });
+
+  it('should return row with missing field indicated with "N/A" string if field does not exist', async function () {
+    var data = [
+      { _id: 71 },
+      { _id: 80, value: false },
+      { _id: 100, value: true }
+    ];
+    var field = "value";
+    var value = "";
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
+    assert.equal("N/A", jsonObj.data[0].value, "Query should return row with missing field with value N/A");
+  });
+
+  it('should return row with missing field indicated with "N/A" string if field is empty', async function () {
+    var data = [
+      { _id: 71, value: "" },
+      { _id: 80, value: false },
+      { _id: 100, value: true }
+    ];
+    var field = "value";
+    var value = "";
+    var keys = ["_id", "value"];
+    var jsonObj = await jsonQuery.query(data, field, value, keys);
+    assert.equal("N/A", jsonObj.data[0].value, "Query should return row with empty field with value N/A");
   });
 
 })

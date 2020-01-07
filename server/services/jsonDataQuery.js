@@ -1,9 +1,11 @@
 /**
  *  @desc Service to be used in controller - queries json array to find rows with key-value 
- *        that matches field and value input      
+ *        that matches field and value input, if rows don't contain some field in keys, they
+ *        have value "N/A"
  *  @params data - array containing json with key value pairs
  *  @params field - string containing key to be queried in each json object in data
  *  @params value - string/boolean/number containing value to be queried for key
+ *  @params keys - array of strings containing the complete set of fields for data
  *  @returns Promise that is resolved or rejected with success field, err or data field containing 
  *           an array of matching json objects
  */
@@ -36,13 +38,14 @@ module.exports.query = function (data, field, value, keys) {
         }
       }
     }
+    // Parsing the matching rows with the same order as keys
     let parsedSol = [];
-    // If any json row in solution with key has values which does not exist, assign N/A
     for (var i = 0; i < sol.length; i++) {
       var newJson = {};
       for (var j = 0; j < keys.length; j++) {
         var newValue = sol[i][keys[j]];
-        if (newValue == undefined) {
+        // If some key has values that do not exist, assign N/A
+        if (newValue == undefined || newValue == "") {
           newJson[keys[j]] = String("N/A");
         } else {
           newJson[keys[j]] = newValue;
