@@ -14,6 +14,7 @@ describe('Json Data Query Service', function () {
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return the row which contains the value for the field");
+    assert.deepInclude(jsonObj.data, {"_id": 71, "value": "text"}, "Should contain matching row json value");
   });
 
   it('should return success field as false if no rows matches query field and value', async function () {
@@ -38,6 +39,7 @@ describe('Json Data Query Service', function () {
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return row with empty value field");
+    assert.deepInclude(jsonObj.data, {"_id": 71, "value": "N/A"}, "Should contain matching row but empty strings are subbed with N/A");
   });
 
   it('should return row even if value field is an array that contains the query value', async function () {
@@ -50,6 +52,7 @@ describe('Json Data Query Service', function () {
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return rows with array field containing value");
+    assert.deepInclude(jsonObj.data, { "_id": 71, "value": ['test', 'is', 'fun'] }, "Should contain matching row and full array for value");
   });
 
   it('should return multiple rows if more than one row contains query value in field', async function () {
@@ -63,6 +66,8 @@ describe('Json Data Query Service', function () {
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 2, "Query should return rows which contain value");
+    assert.deepInclude(jsonObj.data, { "_id": 71, "value": "test" }, "Should contain matching first row");
+    assert.deepInclude(jsonObj.data, { "_id": 80, "value": "test" }, "Should contain matching second row");
   });
 
   it('should return row even if query field is boolean ', async function () {
@@ -76,6 +81,7 @@ describe('Json Data Query Service', function () {
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return row with query boolean value");
+    assert.deepInclude(jsonObj.data, { "_id": 80, "value": false }, "Should contain matching row");
   });
 
   it('should return row if search value is empty for field and field does not exist in row', async function () {
@@ -89,6 +95,7 @@ describe('Json Data Query Service', function () {
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 1, "Query should return row with missing value field");
+    assert.deepInclude(jsonObj.data, { "_id": 71, "value": "N/A" }, "Should return matching row with N/A in missing field");
   });
 
   it('should return rows if search value is empty and field does not exist or empty in row', async function () {
@@ -103,6 +110,8 @@ describe('Json Data Query Service', function () {
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
     assert.equal(jsonObj.data.length, 2, "Query should return row with missing/empty value field");
+    assert.deepInclude(jsonObj.data, { "_id": "N/A", "value": true }, "Should contain matching first row with missing field N/A");
+    assert.deepInclude(jsonObj.data, { "_id": "N/A", "value": true }, "Should contain second matching row with empty field");
   });
 
   it('should return row with missing field indicated with "N/A" string if field does not exist', async function () {
@@ -115,7 +124,8 @@ describe('Json Data Query Service', function () {
     var value = "";
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
-    assert.equal("N/A", jsonObj.data[0].value, "Query should return row with missing field with value N/A");
+    assert.equal(jsonObj.data.length, 1, "Query should return row with missing/empty value field");
+    assert.deepInclude(jsonObj.data, { "_id": 71, "value": "N/A" }, "Should contain matching first row with missing field N/A");
   });
 
   it('should return row with missing field indicated with "N/A" string if field is empty', async function () {
@@ -128,7 +138,8 @@ describe('Json Data Query Service', function () {
     var value = "";
     var keys = ["_id", "value"];
     var jsonObj = await jsonQuery.query(data, field, value, keys);
-    assert.equal("N/A", jsonObj.data[0].value, "Query should return row with empty field with value N/A");
+    assert.equal(jsonObj.data.length, 1, "Query should return row with missing/empty value field");
+    assert.deepInclude(jsonObj.data, { "_id": 71, "value": "N/A" }, "Should contain matching first row with empty field N/A");
   });
 
 })

@@ -45,7 +45,7 @@ module.exports.query = function (data, field, value, keys) {
       for (var j = 0; j < keys.length; j++) {
         var newValue = sol[i][keys[j]];
         // If some key has values that do not exist, assign N/A
-        if (newValue == undefined || newValue == "") {
+        if (newValue == undefined || newValue === "") {
           newJson[keys[j]] = String("N/A");
         } else {
           newJson[keys[j]] = newValue;

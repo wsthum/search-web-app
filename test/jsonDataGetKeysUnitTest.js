@@ -11,6 +11,8 @@ describe('Getting Keys from Json Data Service', function () {
     ];
     var jsonObj = await getKeys.findKeys(data);
     assert.lengthOf(jsonObj.data, 2, "Should have 2 fields in array");
+    assert.deepInclude(jsonObj.data, "_id", "Should contain first column keyname _id");
+    assert.deepInclude(jsonObj.data, "value", "Should contain second column keyname value");
   });
 
   it('should return all keys for array of json data with fields missing', async function () {
@@ -20,6 +22,8 @@ describe('Getting Keys from Json Data Service', function () {
     ];
     var jsonObj = await getKeys.findKeys(data);
     assert.lengthOf(jsonObj.data, 2, "Should have 2 fields in array");
+    assert.deepInclude(jsonObj.data, "_id", "Should contain first column keyname _id");
+    assert.deepInclude(jsonObj.data, "value", "Should contain second column keyname value");
   });
 
   it('should return no keys for empty data', async function () {
