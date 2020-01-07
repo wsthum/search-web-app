@@ -16,6 +16,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(config.apiPath, require(config.documentQueryApiPath));
+app.use(config.apiPath, require(config.findKeysApiPath));
 
 app.use(function (err, req, res, next) {
 	return res.status(500).json({ success: false, error: err.message });

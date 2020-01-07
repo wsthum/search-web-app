@@ -12,12 +12,14 @@ const dataQuery = require("../services/jsonDataQuery");
 module.exports.queryFile = async (req, res) => {
   try {
     const { type } = req.params;
-    const { field, value } = req.body;
+    const { field, value, keys } = req.body;
+    console.log(keys)
     let jsonData = await fileReader.readStaticFileType(type);
     if (!jsonData.success) {
       res.status(200).json(jsonData);
+      return;
     }
-    let querySol = await dataQuery.query(jsonData.data, field, value);
+    let querySol = await dataQuery.query(jsonData.data, field, value, keys);
     res.status(200).json(querySol)
   } catch (e) {
     if (e.message) {

@@ -7,7 +7,7 @@
  *  @returns Promise that is resolved or rejected with success field, err or data field containing 
  *           an array of matching json objects
  */
-module.exports.query = function (data, field, value) {
+module.exports.query = function (data, field, value, keys) {
   return new Promise(function (res, rej) {
     // Contains initial rows that matches query
     var sol = [];
@@ -36,43 +36,17 @@ module.exports.query = function (data, field, value) {
         }
       }
     }
-    // Might have keys that don't exist, need to fix insert order and values that don't exist for keys
-    // Stores keys of the longest json entry in sol
-    let mapFields = [];
-    if (sol.length != 0) {
-      // finds the json object in sol that has most fields
-      let maxLength = 0;
-      for (var i = 0; i < sol.length; i++) {
-        let numKeys = Object.keys(sol[i]).length;
-        if (numKeys > maxLength) {
-          maxLength = numKeys;
-        }
-      }
-      // inserts all the fields of the longest json object into mapFields
-      for (var i = 0; i < sol.length; i++) {
-        let numKeys = Object.keys(sol[i]).length;
-        if (numKeys === maxLength) {
-          for (var key in sol[i]) {
-            mapFields.push(String(key));
-          }
-          break;
-        }
-      }
-      // If any json row in solution with key has values which does not exist, assign N/A
-      for (var i = 0; i < sol.length; i++) {
-        for (var j = 0; j < mapFields.length; j++) {
-          if (sol[i][mapFields[j]] == undefined) {
-            sol[i][mapFields[j]] = String("N/A");
-          }
-        }
-      }
-    }
-    // Need json in similar sequential order, assign fields in order for each json row
     let parsedSol = [];
+    // If any json row in solution with key has values which does not exist, assign N/A
     for (var i = 0; i < sol.length; i++) {
       var newJson = {};
-      for (var j = 0; j < mapFields.length; j++) {
-        newJson[mapFields[j]] = sol[i][mapFields[j]];
+      for (var j = 0; j < keys.length; j++) {
+        var newValue = sol[i][keys[j]];
+        if (newValue == undefined) {
+          newJson[keys[j]] = String("N/A");
+        } else {
+          newJson[keys[j]] = newValue;
+        }
       }
       parsedSol.push(newJson);
     }
