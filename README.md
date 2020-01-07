@@ -3,7 +3,7 @@ This repository contains three main sections - testing, frontend and backend. Si
 * Run unit tests and integration tests for backend using Mocha and Chai library via npm
 * Start the backend NodeJS/Express server using node via npm
 * Serve the Angular app using the standard command line angular interface @angular/cli via npm
-* Use the web application and the understand potential compatibility issues while installing the project
+* Use the web application and understand potential compatibility issues while installing the project
 
 ## Getting Started (Setting Up Environment)
 These steps need to be done sequentially for them to work as intended.
