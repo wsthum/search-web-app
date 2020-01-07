@@ -83,6 +83,9 @@ The mandatory fields are data type and key field, if those are not selected, err
 ### Project use specifications
 This project allows users to choose the data type, select available fields for the data type and find rows which have the exact values specified in the data query for the selected field. If the data query input is left empty, the API will match rows which either have the field empty or the field does not exists. If the field contains an array of elements, the query will match rows that have an array for the field that contains the query value. Happy querying!
 
+### Potential compatibility issues with operating systems
+Due to the fact that I developed this web application on my Windows operating system, I tested the setup instructions on several Windows machines and it worked. However, I observed potential issues when running the commands on Linux/MacOS based operating systems. For example, you have to add sudo in front of some commands to make it work. On top of that, due to some Angular and NodeJS library compatibilities, some warnings might pop up while running npm install. The good news is that, if npm start can be run without issues, the app should work fine on the localhost port.
+
 
 
 
