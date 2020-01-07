@@ -67,7 +67,7 @@ This will start the angular cli to serve the frontend files. It takes a while to
 ![](https://github.com/wsthum/search-web-app/blob/master/screenshots/frontendnpmStart.jpg)
 
 ## Using the application
-With the test completed and the frontend and backend server, we can now start using the application! 
+With the test completed and the frontend and backend server started, we can now start using the application! 
 If you go to http://localhost:4200, you will see the single page web application below.
 
 ![](https://github.com/wsthum/search-web-app/blob/master/screenshots/mainAppUI.jpg)
